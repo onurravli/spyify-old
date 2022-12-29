@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/onurravli/spyify#readme",
   "dependencies": {
+    "argparse": "^2.0.1",
     "spotify-buddylist": "^1.0.0",
     "timestamp-to-date": "^1.1.0"
   }
