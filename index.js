@@ -63,7 +63,33 @@ const main = async () => {
                     exit(-1);
                 }
             }
-        } else {
+        } if (args[0] === "-p" && args[1].length != 0) { // log only one person that user's name is args[1]
+            userExists = false;
+            try {
+                const cookie = SP_DC;
+                const { accessToken } = await buddyList.getWebAccessToken(cookie);
+                const friendActivity = await buddyList.getFriendActivity(accessToken);
+                const obj = friendActivity["friends"];
+                for (person in obj.reverse()) {
+                    if (obj[person]["user"]["name"] === args[1]) {
+                        print(obj[person]);
+                        userExists = true;
+                        break;
+                    } else {
+                        userExists = false;
+                        continue;
+                    }
+                }
+                if (!userExists) {
+                    console.log("User not found");
+                    exit(-1);
+                }
+            } catch {
+                console.log("Some error occured");
+                exit(-1);
+            }
+        }
+        else {
             console.log("usage: spyify [-c <cookie>]");
             exit(-1);
         }
