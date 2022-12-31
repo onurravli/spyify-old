@@ -18,13 +18,14 @@ const print = (person) => {
 };
 
 const main = async () => {
-    if (args.length < 1 || SP_DC.length < 1) {
+    if (SP_DC.length < 1) {
         // Take cookie from user
         const readline = require('readline').createInterface({
             input: process.stdin,
             output: process.stdout
         });
         readline.question('Enter your cookie: ', async (cookie) => {
+            console.log("");
             try {
                 const { accessToken } = await buddyList.getWebAccessToken(cookie);
                 const friendActivity = await buddyList.getFriendActivity(accessToken);
